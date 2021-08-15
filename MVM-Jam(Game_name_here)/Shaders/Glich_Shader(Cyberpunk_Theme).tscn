@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "// I DONT OWN THE SHADER THIS SHADER IS BASED ON THE FOLLOWING GITHUB CODE
+//https://github.com/kuravih/gllock/blob/master/shaders/glitch.fragment.glsl
+
+shader_type canvas_item;
+
+const float RATE=0.5;
+uniform int resolution;
+float rand(vec2 co){
+	return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453) * 2.0 - 1.0;
+}
+
+float offset(float blocks, vec2 uv,float time){
+	float shaderTime = time*RATE;
+	return rand(vec2(shaderTime, floor(uv.y * blocks)));
+	}
+	
+void fragment(){
+	COLOR = texture(TEXTURE, UV);
+	COLOR.r = texture(TEXTURE,UV + vec2(offset(64.0,UV,TIME) * 0.03, 0.0)).r;
+	COLOR.g = texture(TEXTURE, UV + vec2(offset(64.0, UV,TIME) * 0.03 * 0.166666, 0.0)).g;
+ 	COLOR.b = texture(TEXTURE, UV + vec2(offset(64.0, UV,TIME) * 0.03, 0.0)).b;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/resolution = 2
+
+[node name="Glich_shader" type="Sprite"]
+material = SubResource( 2 )
+texture = ExtResource( 1 )
