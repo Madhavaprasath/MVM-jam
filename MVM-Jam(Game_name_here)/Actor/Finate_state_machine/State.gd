@@ -8,3 +8,4 @@ func play_state(delta):
 
 func  check_exit_condition(delta):
 	pass
+
