@@ -38,6 +38,11 @@ _global_script_classes=[ {
 "class": "Finite_state_machine",
 "language": "GDScript",
 "path": "res://Actor/Finate_state_machine/Finite_state_machine.gd"
+}, {
+"base": "Node",
+"class": "state",
+"language": "GDScript",
+"path": "res://Actor/Finate_state_machine/State.gd"
 } ]
 _global_script_class_icons={
 "Dialogic": "",
@@ -45,7 +50,8 @@ _global_script_class_icons={
 "DialogicDefinitionsUtil": "",
 "DialogicResources": "",
 "DialogicUtil": "",
-"Finite_state_machine": ""
+"Finite_state_machine": "",
+"state": ""
 }
 
 [application]
