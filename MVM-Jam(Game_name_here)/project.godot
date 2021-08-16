@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "DialogicUtil",
 "language": "GDScript",
 "path": "res://addons/dialogic/Other/DialogicUtil.gd"
+}, {
+"base": "Node",
+"class": "Finite_state_machine",
+"language": "GDScript",
+"path": "res://Actor/Finate_state_machine/Finite_state_machine.gd"
 } ]
 _global_script_class_icons={
 "Dialogic": "",
 "DialogicBackgroundMusic": "",
 "DialogicDefinitionsUtil": "",
 "DialogicResources": "",
-"DialogicUtil": ""
+"DialogicUtil": "",
+"Finite_state_machine": ""
 }
 
 [application]
