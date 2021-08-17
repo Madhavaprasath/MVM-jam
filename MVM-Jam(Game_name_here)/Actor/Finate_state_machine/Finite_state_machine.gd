@@ -7,7 +7,7 @@ var current_state
 var stack=[]
 
 
-onready var actor=get_parent()
+onready var parent=get_parent()
 
 
 func _physics_process(delta):
@@ -22,10 +22,10 @@ func _physics_process(delta):
 		
 
 func pop_state():
-	return stack.pop()
+	return stack.pop_front()
 
 func push_state(state):
-	stack.push(state)
+	stack.push_front(state)
 
 
 

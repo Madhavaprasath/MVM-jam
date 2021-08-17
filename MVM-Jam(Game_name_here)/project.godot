@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Actor/Finate_state_machine/Finite_state_machine.gd"
 }, {
+"base": "Node2D",
+"class": "Upgrade_stats",
+"language": "GDScript",
+"path": "res://Actor/Update_system.gd"
+}, {
 "base": "Node",
 "class": "state",
 "language": "GDScript",
@@ -51,6 +56,7 @@ _global_script_class_icons={
 "DialogicResources": "",
 "DialogicUtil": "",
 "Finite_state_machine": "",
+"Upgrade_stats": "",
 "state": ""
 }
 

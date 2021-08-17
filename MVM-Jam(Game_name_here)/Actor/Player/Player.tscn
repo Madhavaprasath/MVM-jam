@@ -1,11 +1,32 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Actor/Actor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Actor/Player/Player.gd" type="Script" id=2]
-[ext_resource path="res://Actor/Player/Player_state_machine/Finite_state_machine.gd" type="Script" id=3]
+[ext_resource path="res://Actor/Player/Player_state_machine/Player_state_machine.gd" type="Script" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Actor/Player/Player_state_machine/Player_state/Idle.gd" type="Script" id=5]
+[ext_resource path="res://Actor/Player/Player_state_machine/Player_state/Run.gd" type="Script" id=6]
+[ext_resource path="res://Actor/Player/Player_state_machine/Player_state/Fall.gd" type="Script" id=7]
+[ext_resource path="res://Actor/Player/Player_state_machine/Player_state/Jump.gd" type="Script" id=8]
 
 [node name="Player" instance=ExtResource( 1 )]
+position = Vector2( 83.9052, 126.232 )
 script = ExtResource( 2 )
 
-[node name="Finite_state_machine" parent="." index="0"]
+[node name="Finite_state_machine" type="Node" parent="." index="0"]
 script = ExtResource( 3 )
+
+[node name="Idle" type="Node" parent="Finite_state_machine" index="0"]
+script = ExtResource( 5 )
+
+[node name="Run" type="Node" parent="Finite_state_machine" index="1"]
+script = ExtResource( 6 )
+
+[node name="Jump" type="Node" parent="Finite_state_machine" index="2"]
+script = ExtResource( 8 )
+
+[node name="Fall" type="Node" parent="Finite_state_machine" index="3"]
+script = ExtResource( 7 )
+
+[node name="Sprite" parent="Body" index="1"]
+texture = ExtResource( 4 )

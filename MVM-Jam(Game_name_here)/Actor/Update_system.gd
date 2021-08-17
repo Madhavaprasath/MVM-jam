@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name Upgrade_stats
 
 signal on_stats_changed(key,value)
 
