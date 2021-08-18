@@ -16,9 +16,9 @@ script = ExtResource( 3 )
 
 [node name="Body" type="Node2D" parent="."]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
-
 [node name="Sprite" type="Sprite" parent="Body"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

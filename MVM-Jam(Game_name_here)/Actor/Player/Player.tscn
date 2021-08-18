@@ -28,5 +28,7 @@ script = ExtResource( 8 )
 [node name="Fall" type="Node" parent="Finite_state_machine" index="3"]
 script = ExtResource( 7 )
 
-[node name="Sprite" parent="Body" index="1"]
+[node name="Double_jump" type="Node" parent="Finite_state_machine" index="4"]
+
+[node name="Sprite" parent="Body" index="0"]
 texture = ExtResource( 4 )

@@ -13,9 +13,9 @@ onready var parent=get_parent()
 func _physics_process(delta):
 	current_state=get_currentstate()
 	if current_state!=null:
-		var state=get_node(current_state)
-		state.play_state(delta)
-		var next_state=state.check_exit_condition(delta)
+		var states=get_node(current_state)
+		states.play_state(delta)
+		var next_state=states.check_exit_condition(delta)
 		if next_state!=null:
 			previous_state=pop_state()
 			push_state(next_state)

@@ -3,7 +3,7 @@ extends state
 
 
 func play_state(delta):
-	actor.come_to_rest()
+	actor.move_player()
 	actor.apply_gravity(delta)
 func  check_exit_condition(delta):
 	if actor.is_on_floor():
