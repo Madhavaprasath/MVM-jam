@@ -1,21 +1,32 @@
 extends KinematicBody2D
 
-export (int) var max_speed=300
-export(int)  var gravity=1200
+const MAX_JUMP_DISTANCE=2*64
+const MIN_JUMP_DISTANCE=0.5*64
+
+
+
+
+export (int) var max_speed=400
 export (int) var accerleration=20
-export (int) var Jump_speed=-500
+export (int) var Jump_speed=-750
 
 var velocity=Vector2()
 var direction
 var snap=false
+var jump_duration=0.5
+var curve_time=0
+
 onready var finite_state_machine=get_node("Finite_state_machine")
 
+onready var gravity=2*(MAX_JUMP_DISTANCE/pow(jump_duration,2))
+onready var max_jump_velocity=-sqrt(2*gravity*MAX_JUMP_DISTANCE)
+onready var min_jump_velocity=-sqrt(2*gravity*MIN_JUMP_DISTANCE)
 
 
 
 func _ready():
 	finite_state_machine.push_state("Idle")
-	#get the stats from the player and store it in a variable
+	print(gravity,max_jump_velocity,min_jump_velocity)
 	pass
 
 
@@ -29,10 +40,9 @@ func check_movement():
 	direction=int(movements["right"])-  int(movements["left"])
 	return direction
 
-func move_player(direction=check_movement()):
-	
-	velocity.x+=lerp(velocity.x,direction*accerleration,0.8)
-	velocity.x=clamp(velocity.x,-max_speed,max_speed)
+func move_player():
+	direction=check_movement()
+	velocity.x=lerp(velocity.x,direction*max_speed,0.00005)
 	apply_velocity()
 
 func apply_gravity(delta):
@@ -40,16 +50,18 @@ func apply_gravity(delta):
 
 
 func apply_velocity():
-	if Input.is_action_just_pressed("Jump") && snap:
-		velocity.y=Jump_speed
-		snap=false
-
 	var snap_vector=Vector2.DOWN*32 if snap else Vector2.ZERO
 	velocity=move_and_slide_with_snap(velocity,snap_vector,Vector2.UP)
 	var landed=is_on_floor() and !snap
 	if landed:
 		snap=true
+ 
 
-func come_to_rest():
-	velocity.x=lerp(velocity.x,0.0,0.4)
-	apply_velocity()
+
+func _input(event):
+	if snap && is_on_floor():
+		if event.is_action_pressed("Jump"):
+			velocity.y=max_jump_velocity
+			snap=false
+	if event.is_action_released("Jump") && velocity.y<min_jump_velocity:
+		velocity.y=min_jump_velocity
