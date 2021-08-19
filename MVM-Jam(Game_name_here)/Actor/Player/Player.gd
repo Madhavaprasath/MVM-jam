@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+signal start_slow_motion(duration,strength)
+
+
 const MAX_JUMP_DISTANCE=2*64
 const MIN_JUMP_DISTANCE=0.5*64
 
@@ -9,26 +12,30 @@ const MIN_JUMP_DISTANCE=0.5*64
 export (int) var max_speed=400
 export (int) var accerleration=20
 export (int) var Jump_speed=-750
+export (Vector2) var double_jump_push=Vector2(250,250)
+
+
 
 var velocity=Vector2()
 var direction
 var snap=false
 var jump_duration=0.5
 var curve_time=0
+var jump_count=0 
+var double_jumping
+
 
 onready var finite_state_machine=get_node("Finite_state_machine")
 
 onready var gravity=2*(MAX_JUMP_DISTANCE/pow(jump_duration,2))
 onready var max_jump_velocity=-sqrt(2*gravity*MAX_JUMP_DISTANCE)
 onready var min_jump_velocity=-sqrt(2*gravity*MIN_JUMP_DISTANCE)
-
+onready var animation_player=get_node("Body/AnimationPlayer")
 
 
 func _ready():
 	finite_state_machine.push_state("Idle")
 	print(gravity,max_jump_velocity,min_jump_velocity)
-	pass
-
 
 
 
@@ -41,8 +48,7 @@ func check_movement():
 	return direction
 
 func move_player():
-	direction=check_movement()
-	velocity.x=lerp(velocity.x,direction*max_speed,0.00005)
+	velocity.x=lerp(velocity.x,direction*max_speed,0.2)
 	apply_velocity()
 
 func apply_gravity(delta):
@@ -55,13 +61,18 @@ func apply_velocity():
 	var landed=is_on_floor() and !snap
 	if landed:
 		snap=true
- 
+		jump_count=0
+		double_jumping=false
 
 
-func _input(event):
-	if snap && is_on_floor():
-		if event.is_action_pressed("Jump"):
+func _unhandled_input(event):
+	if event.is_action_pressed("Jump"):
+		if snap && is_on_floor() && jump_count<1:
+			jump_count=1
 			velocity.y=max_jump_velocity
 			snap=false
+		elif jump_count==1:
+			double_jumping=true
 	if event.is_action_released("Jump") && velocity.y<min_jump_velocity:
 		velocity.y=min_jump_velocity
+

@@ -9,3 +9,5 @@ func play_state(delta):
 func  check_exit_condition(delta):
 	if actor.velocity.y>0:
 		return "Fall"
+	if actor.double_jumping:
+		return "Double_jump"
