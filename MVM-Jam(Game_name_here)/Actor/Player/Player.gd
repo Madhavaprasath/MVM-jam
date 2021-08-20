@@ -17,12 +17,12 @@ export (Vector2) var double_jump_push=Vector2(250,250)
 
 
 var velocity=Vector2()
-var direction
-var snap=false
-var jump_duration=0.5
-var curve_time=0
-var jump_count=0 
-var double_jumping
+var direction:int = 0
+var snap:bool = false
+var jump_duration:float = 0.5
+var curve_time:float = 0
+var jump_count:int = 0 
+var double_jumping:bool
 
 
 onready var finite_state_machine=get_node("Finite_state_machine")
@@ -32,18 +32,12 @@ onready var max_jump_velocity=-sqrt(2*gravity*MAX_JUMP_DISTANCE)
 onready var min_jump_velocity=-sqrt(2*gravity*MIN_JUMP_DISTANCE)
 onready var animation_player=get_node("Body/AnimationPlayer")
 
-
 func _ready():
 	finite_state_machine.push_state("Idle")
 	print(gravity,max_jump_velocity,min_jump_velocity)
 
-
-
-
 func check_movement():
-	var movements={"left":Input.is_action_pressed("ui_left"),
-					"right":Input.is_action_pressed("ui_right")}
-	
+	var movements:Dictionary={"left":Input.is_action_pressed("ui_left"),"right":Input.is_action_pressed("ui_right")}
 	direction=int(movements["right"])-  int(movements["left"])
 	return direction
 
@@ -53,7 +47,6 @@ func move_player():
 
 func apply_gravity(delta):
 	velocity.y+=gravity*delta
-
 
 func apply_velocity():
 	var snap_vector=Vector2.DOWN*32 if snap else Vector2.ZERO
@@ -75,4 +68,3 @@ func _unhandled_input(event):
 			double_jumping=true
 	if event.is_action_released("Jump") && velocity.y<min_jump_velocity:
 		velocity.y=min_jump_velocity
-
