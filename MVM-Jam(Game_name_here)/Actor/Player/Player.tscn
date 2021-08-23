@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Actor/Actor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Actor/Player/Player.gd" type="Script" id=2]
@@ -13,7 +13,24 @@
 [ext_resource path="res://Actor/Player/Player_state_machine/Player_state/Abilites.gd" type="Script" id=11]
 
 [sub_resource type="Animation" id=1]
-resource_name = "initiate_double_jump"
+resource_name = "emit_slow_motion"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/path = NodePath("Double_jump/check_double_jump")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "add_slow_motion"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
 length = 0.01
 tracks/0/type = "method"
 tracks/0/path = NodePath("../Finite_state_machine/Double_jump/check_double_jump")
@@ -53,19 +70,21 @@ script = ExtResource( 8 )
 script = ExtResource( 11 )
 stats_path = NodePath("../../Stats")
 
-[node name="check_double_jump" type="Node" parent="Finite_state_machine/Double_jump" index="0"]
+[node name="check_double_jump" type="Node" parent="Finite_state_machine/Double_jump" index="0" groups=[
+"Slowmotion",
+"State",
+]]
 script = ExtResource( 9 )
 parent_path = NodePath("../../..")
 
 [node name="Fall" type="Node" parent="Finite_state_machine" index="4"]
 script = ExtResource( 7 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Finite_state_machine" index="5"]
+anims/emit_slow_motion = SubResource( 1 )
+
 [node name="Sprite" parent="Body" index="0"]
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" parent="Body" index="1"]
-anims/initiate_double_jump = SubResource( 1 )
-
-[node name="Timers" type="Node2D" parent="." index="4"]
-
-[node name="Slow_down_timer" type="Timer" parent="Timers" index="0"]
+anims/initiate_double_jump = SubResource( 2 )
