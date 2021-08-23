@@ -20,7 +20,7 @@ var jump_duration:float = 0.5
 var curve_time:float = 0
 var jump_count:int = 0 
 var double_jumping:bool
-
+var invisible=false
 
 onready var finite_state_machine=get_node("Finite_state_machine")
 
