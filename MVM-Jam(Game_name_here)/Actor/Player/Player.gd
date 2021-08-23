@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-signal start_slow_motion(duration,strength)
-
 
 const MAX_JUMP_DISTANCE=2*64
 const MIN_JUMP_DISTANCE=0.5*64
@@ -12,7 +10,6 @@ const MIN_JUMP_DISTANCE=0.5*64
 export (int) var max_speed=400
 export (int) var accerleration=20
 export (int) var Jump_speed=-750
-export (Vector2) var double_jump_push=Vector2(250,250)
 
 
 
