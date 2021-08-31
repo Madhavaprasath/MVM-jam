@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/Some Time Later.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://StartButton.gd" type="Script" id=2]
+[ext_resource path="res://ExitButton.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+font_data = ExtResource( 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="."]
+margin_left = 320.791
+margin_top = 98.3575
+margin_right = 666.791
+margin_bottom = 204.358
+custom_fonts/font = SubResource( 1 )
+text = "Start"
+flat = true
+script = ExtResource( 2 )
+
+[node name="ExitButton" type="Button" parent="."]
+margin_left = 315.839
+margin_top = 303.888
+margin_right = 681.839
+margin_bottom = 407.888
+custom_fonts/font = SubResource( 2 )
+text = "Exit"
+flat = true
+script = ExtResource( 3 )
+
+[connection signal="pressed" from="StartButton" to="StartButton" method="_on_StartButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="ExitButton" method="_on_ExitButton_pressed"]
