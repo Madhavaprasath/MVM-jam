@@ -38,6 +38,7 @@ func  check_exit_condition(delta):
 	if current_mode==mode.finished ||(current_mode==mode.apply && direction_vector==Vector2()):
 		reset_variables()
 		return "Fall"
+	return null 
 func check_movement():
 	var x_direction=int(Input.is_action_pressed("ui_right"))-int(Input.is_action_pressed("ui_left"))
 	var y_direction=-int(Input.is_action_pressed("Jump"))+int(Input.is_action_pressed("Crouch"))

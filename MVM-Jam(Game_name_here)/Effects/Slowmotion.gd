@@ -1,5 +1,7 @@
 extends Node
 
+signal blur_screen()
+
 const End_value = 1
 
 var is_active:bool
@@ -17,12 +19,12 @@ func start_slow_motion(duration = 3, strength = 0.8,nodes=self):
 	start_value = 1-strength
 	Engine.time_scale = start_value
 	is_active = true
+	emit_signal("blur_screen")
 	current_node=nodes
 func _physics_process(delta):
 	if is_active:
 		var current_time:int = OS.get_ticks_msec()-time_start
 		var value:float = circle_ease_in(current_time,start_value,End_value,duration_in_ms)
-		print(current_time)
 		if current_time >= duration_in_ms:
 			value = End_value
 			is_active = false

@@ -21,6 +21,7 @@ var curve_time:float = 0
 var jump_count:int = 0 
 var double_jumping:bool
 var invisible=false
+var activate_attack_ability=false
 
 onready var finite_state_machine=get_node("Finite_state_machine")
 
@@ -55,7 +56,7 @@ func apply_velocity():
 		double_jumping=false
 
 
-func _unhandled_input(event):
+func _input(event):
 	if event.is_action_pressed("Jump"):
 		if snap && is_on_floor() && jump_count<1:
 			jump_count=1
@@ -65,3 +66,11 @@ func _unhandled_input(event):
 			double_jumping=true
 	if event.is_action_released("Jump") && velocity.y<min_jump_velocity:
 		velocity.y=min_jump_velocity
+	#attack logic
+	if event is InputEventMouseButton:
+		if event.button_index==2 && event.is_pressed():
+			activate_attack_ability=true
+		if event.button_index==2 && !event.is_pressed():
+			activate_attack_ability=false
+
+

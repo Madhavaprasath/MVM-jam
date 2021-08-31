@@ -10,7 +10,6 @@ var jump_count=0
 func play_state(delta):
 	if Input.is_action_pressed("Jump") && jump_count<=0:
 		actor.velocity.y=double_jumping_speed
-		print(double_jumping_speed)
 		jump_count+=1
 	actor.apply_velocity()
 	if jump_count<0:
