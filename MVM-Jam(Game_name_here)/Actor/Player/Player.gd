@@ -72,5 +72,8 @@ func _input(event):
 			activate_attack_ability=true
 		if event.button_index==2 && !event.is_pressed():
 			activate_attack_ability=false
-
-
+			
+			
+func _process(delta):
+	if position.y >= 600:
+		get_tree().change_scene("res://menu_test.tscn")
