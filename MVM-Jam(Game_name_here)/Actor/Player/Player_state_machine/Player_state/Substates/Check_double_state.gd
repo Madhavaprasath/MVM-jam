@@ -11,7 +11,7 @@ enum mode{check,apply,finished}
 var current_mode=mode.check
 
 
-
+var dash_velocity=Vector2()
 var direction_vector=Vector2(0,0)
 
 var animation_started=false
@@ -26,10 +26,13 @@ func play_state(delta):
 			fsm.animation_player.play(current_animtion)
 		direction_vector=check_movement()
 	if direction_vector!=Vector2(0,0) && current_mode==mode.apply:
-		actor.velocity.x=dash_speed.x*direction_vector.x
-		actor.velocity.y=direction_vector.y*dash_speed.y
+		dash_velocity.x=dash_speed.x*direction_vector.x
+		dash_velocity.y=direction_vector.y*dash_speed.y
 		current_mode=mode.finished
-	actor.apply_velocity()
+	if dash_velocity!=Vector2.ZERO:
+		actor.velocity=dash_velocity
+		print(actor.velocity)
+	actor.move_and_slide(actor.velocity,Vector2.UP)
 
 
 
@@ -52,3 +55,4 @@ func reset_variables():
 	animation_started=false
 	current_mode=mode.check
 	direction_vector=Vector2()
+	dash_velocity=Vector2()
