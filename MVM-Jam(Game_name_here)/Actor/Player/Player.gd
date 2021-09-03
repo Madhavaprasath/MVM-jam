@@ -35,6 +35,7 @@ onready var collision_shape=get_node("CollisionShape2D")
 func _ready():
 	finite_state_machine.push_state("Idle")
 	print(gravity,max_jump_velocity,min_jump_velocity)
+	print(Engine.time_scale)
 
 func check_movement():
 	var movements:Dictionary={"left":Input.is_action_pressed("ui_left"),"right":Input.is_action_pressed("ui_right")}
