@@ -29,6 +29,8 @@ onready var gravity=2*(MAX_JUMP_DISTANCE/pow(jump_duration,2))
 onready var max_jump_velocity=-sqrt(2*gravity*MAX_JUMP_DISTANCE)
 onready var min_jump_velocity=-sqrt(2*gravity*MIN_JUMP_DISTANCE)
 onready var animation_player=get_node("Body/AnimationPlayer")
+onready var collision_shape=get_node("CollisionShape2D")
+
 
 func _ready():
 	finite_state_machine.push_state("Idle")

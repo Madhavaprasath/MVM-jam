@@ -107,9 +107,13 @@ script = ExtResource( 14 )
 script = ExtResource( 15 )
 parent_path = NodePath("../../..")
 
-[node name="ability_2" type="Node" parent="Finite_state_machine/Attack_Ability" index="1"]
+[node name="ability_2" type="Node" parent="Finite_state_machine/Attack_Ability" index="1" groups=[
+"Slowmotion",
+]]
 script = ExtResource( 17 )
 parent_path = NodePath("../../..")
+
+[node name="Timer" type="Timer" parent="Finite_state_machine/Attack_Ability/ability_2" index="0"]
 
 [node name="ability_3" type="Node" parent="Finite_state_machine/Attack_Ability" index="2"]
 script = ExtResource( 16 )
@@ -132,9 +136,12 @@ anims/initiate_double_jump = SubResource( 2 )
 [node name="Areas" type="Node2D" parent="." index="4"]
 
 [node name="Detect_area" type="Area2D" parent="Areas" index="0"]
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/Detect_area" index="0"]
 shape = SubResource( 3 )
 disabled = true
 
+[connection signal="timeout" from="Finite_state_machine/Attack_Ability/ability_2/Timer" to="Finite_state_machine/Attack_Ability/ability_2" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Areas/Detect_area" to="Finite_state_machine/Attack_Ability/ability_2" method="_on_Detect_area_body_entered"]

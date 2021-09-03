@@ -1,7 +1,10 @@
-extends ColorRect
+extends TextureRect
+
+
 const DURATION=3000
 var is_active=false
 var time_start
+
 func _on_Slowmotion_blur_screen():
 	time_start=OS.get_ticks_msec()
 	material.set_shader_param("blur",1)

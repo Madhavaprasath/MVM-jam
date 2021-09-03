@@ -14,6 +14,7 @@ func  check_exit_condition(delta):
 			return "Jump"
 		elif actor.velocity.y>0:
 			return "Fall"
-	elif actor.activate_attack_ability:
-		return "Attack_ability" 
+	if actor.activate_attack_ability:
+		print("ajkdkjadh")
+		return "Attack_Ability" 
 	return null 

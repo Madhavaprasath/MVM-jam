@@ -21,6 +21,7 @@ func start_slow_motion(duration = 3, strength = 0.8,nodes=self):
 	is_active = true
 	emit_signal("blur_screen")
 	current_node=nodes
+
 func _physics_process(delta):
 	if is_active:
 		var current_time:int = OS.get_ticks_msec()-time_start

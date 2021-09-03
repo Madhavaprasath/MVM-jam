@@ -1,10 +1,12 @@
 extends state
 
 
-func play_state(delta):
-	return("ability_2_Attack")
+
+
+func return_path(state):
+	return (str(name) + "/" + state)
 
 func  check_exit_condition(delta):
-	pass
+	return return_path("ability_2")
 
 
