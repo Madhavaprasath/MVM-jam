@@ -12,6 +12,10 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 524298, 2, 4, 589858, 2, 4, 589859, 2, 2, 655360, 2, 0, 655361, 2, 1, 655362, 2, 1, 655363, 2, 1, 655364, 2, 2, 655392, 2, 4, 655393, 2, 1, 655394, 2, 4, 720901, 2, 0, 720902, 2, 1, 720903, 2, 1, 720904, 2, 1, 720905, 2, 1, 720906, 2, 1, 720907, 2, 1, 720908, 2, 1, 720909, 2, 1, 720910, 2, 1, 720911, 2, 1, 720912, 2, 1, 720913, 2, 1, 720914, 2, 1, 720915, 2, 1, 720916, 2, 1, 720917, 2, 1, 720918, 2, 1, 720919, 2, 1, 720920, 2, 1, 720921, 2, 1, 720922, 2, 1, 720923, 2, 1, 720924, 2, 1, 720925, 2, 1, 720926, 2, 1, 720927, 2, 1, 720928, 2, 4 )
 
+[node name="Effects" type="Node" parent="."]
+
+[node name="Slowmotion" parent="Effects" instance=ExtResource( 3 )]
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -22,7 +26,3 @@ drag_margin_left = 0.3
 drag_margin_top = 0.3
 drag_margin_right = 0.3
 drag_margin_bottom = 0.3
-
-[node name="Effects" type="Node" parent="."]
-
-[node name="Slowmotion" parent="Effects" instance=ExtResource( 3 )]
