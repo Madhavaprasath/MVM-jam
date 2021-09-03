@@ -61,5 +61,3 @@ texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 shape = SubResource( 3 )
-
-[connection signal="blur_screen" from="Effects/Slowmotion" to="CanvasLayer/TextureRect" method="_on_Slowmotion_blur_screen"]
